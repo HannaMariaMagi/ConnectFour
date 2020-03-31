@@ -32,22 +32,29 @@ public class Maatriks {
 
     public void lisaNupp(int veerg, String nupp) {
         veerg -= 1;
-        if (mangulaud.get(0).get(veerg).equals(tuhi_nupp)){
+        if (mangulaud.get(0).get(veerg).equals(tuhi_nupp)) {
             for (int i = ridade_arv - 1; i >= 0; i--) {
                 if (mangulaud.get(i).get(veerg).equals(tuhi_nupp)) {
                     mangulaud.get(i).set(veerg, nupp);
                     break;
                 }
             }
-        }
-        else {
+        } else {
             System.out.println("Veerg on nuppe täis.");
         }
 
     }
+
     public void valjastaMangulaud() {
         for (ArrayList<String> rida : mangulaud) {
-            System.out.println(rida);
+            System.out.println();
+            for (int i = 0; i < rida.size(); i++) {
+                System.out.print(rida.get(i) + "\t");
+            }
+        }
+        System.out.println();
+        for (int i = 1; i <= veergude_arv; i++) {
+            System.out.print(i + "\t");
         }
     }
 
@@ -102,16 +109,16 @@ public class Maatriks {
                     //kontrollib "/" pidi
                     if (j <= veergude_arv - voidu_tingimus && i >= voidu_tingimus - 1) {
                         if (mangulaud.get(i - 1).get(j + 1).equals(nupp) &&
-                            mangulaud.get(i - 2).get(j + 2).equals(nupp) &&
-                            mangulaud.get(i - 3).get(j + 3).equals(nupp)) {
+                                mangulaud.get(i - 2).get(j + 2).equals(nupp) &&
+                                mangulaud.get(i - 3).get(j + 3).equals(nupp)) {
                             return true;
                         }
                     }
                     // kontrollib "\" pidi
                     if (j >= voidu_tingimus - 1 && i >= voidu_tingimus - 1) {
                         if (mangulaud.get(i - 1).get(j - 1).equals(nupp) &&
-                            mangulaud.get(i - 2).get(j - 2).equals(nupp) &&
-                            mangulaud.get(i - 3).get(j - 3).equals(nupp)) {
+                                mangulaud.get(i - 2).get(j - 2).equals(nupp) &&
+                                mangulaud.get(i - 3).get(j - 3).equals(nupp)) {
                             return true;
                         }
                     }
@@ -122,5 +129,5 @@ public class Maatriks {
         return false;
     }
 
-   // ⚫ ⚪ 🅐
+    // ⚫ ⚪ 🅐
 }
