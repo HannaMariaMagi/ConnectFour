@@ -43,7 +43,7 @@ public class Peaklass {
             laud.lisaNupp(suvalineVeerg, arvuti.getNupp());
             laud.valjastaMangulaud();
             System.out.println();
-            if ((laud.kontrolliViik(inimene.getNupp()) == true) || (laud.kontrolliViik(arvuti.getNupp()) == true)){
+            if (laud.kontrolliViik() == true){
                 System.out.println("Mäng jäi viiki!");
                 break;
             }

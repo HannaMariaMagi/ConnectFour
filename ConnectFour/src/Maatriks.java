@@ -128,10 +128,10 @@ public class Maatriks {
         return false;
     }
 
-    public boolean kontrolliViik(String nupp){
+    public boolean kontrolliViik(){
         for (int i = 0; i < 1; i++) {
             for (int j = 0; j < veergude_arv; j++) {
-                if(!mangulaud.get(i).get(j).equals(nupp))
+                if(mangulaud.get(i).get(j).equals(tuhi_nupp))
                     return false;
             }
         }
