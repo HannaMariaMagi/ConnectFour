@@ -3,13 +3,14 @@ import java.util.ArrayList;
 public class Maatriks {
     private int ridade_arv;
     private int veergude_arv;
-    private int voidu_tingimus = 4;
+    private int voidu_tingimus;
     private ArrayList<ArrayList<String>> mangulaud;
     private String tuhi_nupp = "⚪";
 
-    public Maatriks(int ridade_arv, int veergude_arv) {
+    public Maatriks(int ridade_arv, int veergude_arv, int voidu_tingimus) {
         this.ridade_arv = ridade_arv;
         this.veergude_arv = veergude_arv;
+        this.voidu_tingimus = voidu_tingimus;
     }
 
     public void setMangulaud(ArrayList<ArrayList<String>> mangulaud) {
@@ -123,7 +124,6 @@ public class Maatriks {
                     }
                 }
             }
-
         }
         return false;
     }
