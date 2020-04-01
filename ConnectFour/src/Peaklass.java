@@ -1,19 +1,19 @@
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
 
 public class Peaklass {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         //mängu selgitav tekst
         System.out.println("Tere tulemast mängima mängu 'Connect Four'! ");
-        System.out.println("Oma käigu ajal pead valima, millisest veerust oma nuppu soovid sisestada. Seejärel teeb seda sama sinu vastaseks olev arvuti.");
-        System.out.println("Mängu eesmärgiks on olla esimene, kes moodustab horisontaalse, vertikaalse või diagonaalse joone neljast oma nupust.");
-        System.out.println("Alustamiseks pead sisestama oma nime ja sümboli, millega sooviksid mängida." +
-                " Seejärel sisesta soovitud mängulaua suurused ja võidu tingimus.");
-        System.out.println("Head mängimist!");
+        System.out.println("Oma käigu ajal pead valima, millisest veerust oma nuppu soovid sisestada. \nSeejärel teeb seda sama sinu vastaseks olev arvuti.");
+        System.out.println("Mängu eesmärgiks on olla esimene, kes moodustab horisontaalse, vertikaalse või diagonaalse joone,\nmis oleks sama pikk kui võidu tingimus.");
+        System.out.println("Alustamiseks pead sisestama oma nime ja sümboli, millega sooviksid mängida. \nSeejärel sisesta soovitud mängulaua suurused ja võidu tingimus.");
+        System.out.println("Head mängimist!\n________________________________________________________________________");
 
         //kasutajaga suhtlemine
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Sisestage oma nimi: ");
+        System.out.println("\nSisestage oma nimi: ");
         String mangijaNimi = scanner.next();
         System.out.println("Sisestage sümbol, millega tahaksite mängida, näiteks '⚫': ");
         String mangijaNupp = scanner.next();
@@ -32,30 +32,43 @@ public class Peaklass {
         Maatriks laud = new Maatriks(ridadeArv,veergudeArv, voiduTingimus);
         System.out.println("Loodud mängulaud: ");
         laud.looTuhiMangulaud();
+        laud.valjastaMangulaud();
 
         //mängimine
-        while((laud.kontrolliVoit(inimene.getNupp()) != true) && (laud.kontrolliVoit(arvuti.getNupp()) != true)){
-            System.out.println();
-            System.out.println("Sisestage veerg, kuhu soovite nuppu panna: ");
+        while(true){
+            //inimene
+            System.out.println("\nSisestage veerg, kuhu soovite nuppu panna: ");
             int sisestaVeergu = scanner.nextInt();
             laud.lisaNupp(sisestaVeergu, inimene.getNupp());
-            System.out.println();
-            System.out.println("Arvuti käik");
+            laud.valjastaMangulaud();
+            if (laud.kontrolliVoit(inimene.getNupp())) {
+                System.out.println("\nPalju õnne " + mangijaNimi + "! Sina võitsid!");
+                break;
+            }
+            if (laud.kontrolliViik()){
+                System.out.println("\nMäng jäi viiki!");
+                break;
+            }
+
+            //arvuti
+            System.out.print("\n\nArvuti käik");
+            for (int i = 0; i < 2; i++) {
+                System.out.print(".");
+                TimeUnit.SECONDS.sleep(1);
+            }
+
             int suvalineVeerg = ThreadLocalRandom.current().nextInt(1,ridadeArv+1);
             laud.lisaNupp(suvalineVeerg, arvuti.getNupp());
             laud.valjastaMangulaud();
-            System.out.println();
-            if (laud.kontrolliViik() == true){
-                System.out.println("Mäng jäi viiki!");
+            if (laud.kontrolliVoit(arvuti.getNupp())) {
+                System.out.println("\nArvuti võitis!");
+                break;
+            }
+            if (laud.kontrolliViik()){
+                System.out.println("\nMäng jäi viiki!");
                 break;
             }
         }
-        if((laud.kontrolliVoit(inimene.getNupp())) == true){
-            System.out.println("Palju õnne " + mangijaNimi + "! Sina võitsid!");
-        }
-        else if ((laud.kontrolliVoit(arvuti.getNupp())) == true){
-            System.out.println("Arvuti võitis!");
-        }
-        System.out.println("Mäng läbi");
+        System.out.println("Mäng läbi.");
     }
 }

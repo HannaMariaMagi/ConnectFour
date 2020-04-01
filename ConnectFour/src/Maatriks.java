@@ -25,9 +25,6 @@ public class Maatriks {
                 maatriks.get(i).add(tuhi_nupp);
             }
         }
-        for (ArrayList<String> maatrik : maatriks) {
-            System.out.println(maatrik);
-        }
         setMangulaud(maatriks);
     }
 
@@ -129,14 +126,11 @@ public class Maatriks {
     }
 
     public boolean kontrolliViik(){
-        for (int i = 0; i < 1; i++) {
-            for (int j = 0; j < veergude_arv; j++) {
-                if(mangulaud.get(i).get(j).equals(tuhi_nupp))
-                    return false;
+        for (int i = 0; i < veergude_arv; i++) {
+            if (mangulaud.get(0).get(i).equals(tuhi_nupp)) {
+                return false;
             }
         }
         return true;
     }
-
-    // ⚫ ⚪ 🅐
 }
