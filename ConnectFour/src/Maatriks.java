@@ -42,7 +42,6 @@ public class Maatriks {
         } else {
             System.out.println("Veerg on nuppe täis.");
         }
-
     }
 
     public void valjastaMangulaud() {
@@ -127,6 +126,16 @@ public class Maatriks {
 
         }
         return false;
+    }
+
+    public boolean kontrolliViik(String nupp){
+        for (int i = 0; i < 1; i++) {
+            for (int j = 0; j < veergude_arv; j++) {
+                if(!mangulaud.get(i).get(j).equals(nupp))
+                    return false;
+            }
+        }
+        return true;
     }
 
     // ⚫ ⚪ 🅐

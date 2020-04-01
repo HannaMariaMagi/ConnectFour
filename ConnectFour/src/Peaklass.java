@@ -43,15 +43,16 @@ public class Peaklass {
             laud.lisaNupp(suvalineVeerg, arvuti.getNupp());
             laud.valjastaMangulaud();
             System.out.println();
+            if ((laud.kontrolliViik(inimene.getNupp()) == true) || (laud.kontrolliViik(arvuti.getNupp()) == true)){
+                System.out.println("Mäng jäi viiki!");
+                break;
+            }
         }
         if((laud.kontrolliVoit(inimene.getNupp())) == true){
             System.out.println("Palju õnne " + mangijaNimi + "! Sina võitsid!");
         }
         else if ((laud.kontrolliVoit(arvuti.getNupp())) == true){
             System.out.println("Arvuti võitis!");
-        }
-        else if ((laud.kontrolliVoit(inimene.getNupp()) == false) && (laud.kontrolliVoit(arvuti.getNupp()) == false)){
-            System.out.println("Viik!");
         }
         System.out.println("Mäng läbi");
     }
