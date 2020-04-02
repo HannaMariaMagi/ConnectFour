@@ -32,3 +32,5 @@ Hinnang: Tänu heale ettevalmistusele sujus meie koostöö ning programmi kirjut
 Tänu sellele, et oleme varasemalt GitHubi kasutanud, siis tuli ka see mugavamalt välja kui varem. Pisemad takistused või probleemid esinesid, kuid suutsime need koos kiirelt lahendada. 
 
 Programmi testimine: Esmalt sai testitud mängija loomist ning mängulaua tööd pannes Peaklassi ise vastavad argumendid. Peale kasutajaga suhtluse loomist katsetasime mängu läbi mitmeid kordi ise mängu mängides ning proovides läbi kõik võimalikud variandid: arvuti võit, mängija võit ja viik. 
+
+Hinnang tööle: Me mõlemad jäime lõpptulemusega rahule, sest saavutasime enda eesmärgi ning lõime ise connect four mängu.
