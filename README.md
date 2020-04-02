@@ -20,7 +20,7 @@ Esmalt kontrollitakse horisontaalselt, seega käiakse kahekordse for - tsükliga
 
 Seejärel kontrollitakse vertikaalselt. Jällegi läbitakse mängulaud kahekordse for - tsükliga. Seekord on välimine tsükkel veergude järgi ning sisemine ridade. Muu sisu on sarnane. 
 
-Viimaks kontrollitakse diagonaalselt. Kahekordse for-tsükli abil hakatakse mängulauda alumisest reast läbi käima. Kui mängulaual on etteantud nupp, siis kontrollitakse, kas võidu tingimus täidetud ühtepidi ülesse (“/”) ning teistpidi ülesse (“\”) diagonaalis. Samas kontrollides tingimus, et kas nii vasakul ja paremal kui ka üleval on piisavalt ruumi, et diagonaal ära mahuks. Näiteks kui võidutingimus on neli nuppu järjest, siis kõige alumisest reast vasakult kolmandal nupul ei kontrollita, kas ta on “\” pidi võit, sest tal pole piisavalt ruumi selle jaoks vasakul.
+Viimaks kontrollitakse diagonaalselt. Kahekordse for-tsükli abil hakatakse mängulauda alumisest reast läbi käima. Kui mängulaual on etteantud nupp, siis kontrollitakse, kas võidu tingimus täidetud ühtepidi ülesse (“/”) ning teistpidi ülesse (“\”) diagonaalis. Samas kontrollides tingimust, et kas nii vasakul ja paremal kui ka üleval on piisavalt ruumi, et diagonaal ära mahuks. Näiteks kui võidutingimus on neli nuppu järjest, siis kõige alumisest reast vasakult kolmandal nupul ei kontrollita, kas ta on “\” pidi võit, sest tal pole piisavalt ruumi selle jaoks vasakul.
 
 Meetod kontrolliViik(String nupp) kontrollib kas kõik veerud on täis ehk mängulaud on täis. Selleks läbib ta for - tsükliga mängulaua kõige ülemise rea. Kui mängulaual olev nupp võrdub tühja nupuga, siis mängulaud ei ole täis ja tagastatakse false, muidu tagastatakse true. 
 
