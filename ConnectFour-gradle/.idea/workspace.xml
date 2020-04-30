@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="4d70c9c8-8dc9-4032-be2a-1628e71de9c4" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="mustruut-gradle" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="mustruut-gradle" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="mustruut-gradle" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="application" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="ProjectId" id="1bFcF9uJtywDk1LtjAivFMbFmXM" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../OOP/mustruut-gradle" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="File.Encoding" />
+    <property name="show.unlinked.gradle.project.popup" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Nora\Desktop\ConnectFour\mustruut-gradle\src\main\java\oop" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.mustruut-gradle [run]">
+    <configuration name="MustRuut" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="oop.MustRuut" />
+      <module name="mustruut-gradle.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="oop.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="mustruut-gradle [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="run" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.mustruut-gradle [run]" />
+        <item itemvalue="Application.MustRuut" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4d70c9c8-8dc9-4032-be2a-1628e71de9c4" name="Default Changelist" comment="" />
+      <created>1588231175208</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1588231175208</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-2117" y="325" key="#com.intellij.ide.util.MemberChooser" timestamp="1588236809033">
+      <screen x="-2560" y="-93" width="2560" height="1410" />
+    </state>
+    <state x="-2117" y="325" key="#com.intellij.ide.util.MemberChooser/0.0.1280.689/-2560.-93.2560.1410@-2560.-93.2560.1410" timestamp="1588236809033" />
+    <state x="-2142" y="370" key="FileChooserDialogImpl" timestamp="1588232195610">
+      <screen x="-2560" y="-93" width="2560" height="1410" />
+    </state>
+    <state x="-2142" y="370" key="FileChooserDialogImpl/0.0.1280.689/-2560.-93.2560.1410@-2560.-93.2560.1410" timestamp="1588232195610" />
+    <state width="1231" height="182" key="GridCell.Tab.0.bottom" timestamp="1588241414471">
+      <screen x="-2560" y="-93" width="2560" height="1410" />
+    </state>
+    <state width="1231" height="182" key="GridCell.Tab.0.bottom/0.0.1280.689/-2560.-93.2560.1410@-2560.-93.2560.1410" timestamp="1588241414471" />
+    <state width="1231" height="182" key="GridCell.Tab.0.center" timestamp="1588241414471">
+      <screen x="-2560" y="-93" width="2560" height="1410" />
+    </state>
+    <state width="1231" height="182" key="GridCell.Tab.0.center/0.0.1280.689/-2560.-93.2560.1410@-2560.-93.2560.1410" timestamp="1588241414471" />
+    <state width="1231" height="182" key="GridCell.Tab.0.left" timestamp="1588241414471">
+      <screen x="-2560" y="-93" width="2560" height="1410" />
+    </state>
+    <state width="1231" height="182" key="GridCell.Tab.0.left/0.0.1280.689/-2560.-93.2560.1410@-2560.-93.2560.1410" timestamp="1588241414471" />
+    <state width="1231" height="182" key="GridCell.Tab.0.right" timestamp="1588241414471">
+      <screen x="-2560" y="-93" width="2560" height="1410" />
+    </state>
+    <state width="1231" height="182" key="GridCell.Tab.0.right/0.0.1280.689/-2560.-93.2560.1410@-2560.-93.2560.1410" timestamp="1588241414471" />
+    <state x="-2442" y="190" key="SettingsEditor" timestamp="1588231303932">
+      <screen x="-2560" y="-93" width="2560" height="1410" />
+    </state>
+    <state x="-2442" y="190" key="SettingsEditor/0.0.1280.689/-2560.-93.2560.1410@-2560.-93.2560.1410" timestamp="1588231303932" />
+    <state x="-2218" y="436" key="com.intellij.ide.util.TipDialog" timestamp="1588241475133">
+      <screen x="-2560" y="-93" width="2560" height="1410" />
+    </state>
+    <state x="-2218" y="436" key="com.intellij.ide.util.TipDialog/0.0.1280.689/-2560.-93.2560.1410@-2560.-93.2560.1410" timestamp="1588241475133" />
+    <state x="-2180" y="244" key="refactoring.ChangeSignatureDialog" timestamp="1588241330362">
+      <screen x="-2560" y="-93" width="2560" height="1410" />
+    </state>
+    <state x="-2180" y="244" key="refactoring.ChangeSignatureDialog/0.0.1280.689/-2560.-93.2560.1410@-2560.-93.2560.1410" timestamp="1588241330362" />
+  </component>
+</project>
