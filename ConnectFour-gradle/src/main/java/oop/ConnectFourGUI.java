@@ -394,8 +394,10 @@ public class ConnectFourGUI extends Application {
         //loeb failist andmed
         System.out.println(loeFailist(TULEMUSTE_FAIL));
         Text varasemad_tulemused = new Text(10,50,loeFailist(TULEMUSTE_FAIL));
+
         Stage võitja = new Stage();
-        võitja.setResizable(false);
+        võitja.setMinWidth(550);
+        võitja.setMinHeight(400);
         Label voitjanimi = new Label("Palju õnne! Võitja: " + (punaseKäik ? esimeneMangija.getNimi() : teineMangija.getNimi()));
         voitjanimi.setTextFill(Color.GOLD);
         voitjanimi.setStyle("-fx-font-size: 32");

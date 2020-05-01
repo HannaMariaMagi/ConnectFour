@@ -8,14 +8,11 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/oop/ConnectFourGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/oop/ConnectFourGUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mängude_tulemused.txt" beforeDir="false" afterPath="$PROJECT_DIR$/mängude_tulemused.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mängude_tulemused.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/oop/ConnectFourGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/oop/ConnectFourGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/oop/Mangija.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/oop/Mangija.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/oop/Peaklass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/oop/Peaklass.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,35 +167,35 @@
     </state>
     <state x="209" y="190" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1588315435821" />
     <state x="-2142" y="370" key="FileChooserDialogImpl/0.0.1280.689/-2560.-93.2560.1410@-2560.-93.2560.1410" timestamp="1588232195610" />
-    <state width="2517" height="285" key="GridCell.Tab.0.bottom" timestamp="1588341698888">
+    <state width="2517" height="285" key="GridCell.Tab.0.bottom" timestamp="1588342589887">
       <screen x="-2560" y="-93" width="2560" height="1410" />
     </state>
     <state width="1237" height="187" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1588339268710" />
-    <state width="2517" height="285" key="GridCell.Tab.0.bottom/0.0.1280.689/-2560.-93.2560.1410@-2560.-93.2560.1410" timestamp="1588341698888" />
-    <state width="2517" height="285" key="GridCell.Tab.0.center" timestamp="1588341698887">
+    <state width="2517" height="285" key="GridCell.Tab.0.bottom/0.0.1280.689/-2560.-93.2560.1410@-2560.-93.2560.1410" timestamp="1588342589887" />
+    <state width="2517" height="285" key="GridCell.Tab.0.center" timestamp="1588342589887">
       <screen x="-2560" y="-93" width="2560" height="1410" />
     </state>
     <state width="1237" height="187" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1588339268710" />
-    <state width="2517" height="285" key="GridCell.Tab.0.center/0.0.1280.689/-2560.-93.2560.1410@-2560.-93.2560.1410" timestamp="1588341698887" />
-    <state width="2517" height="285" key="GridCell.Tab.0.left" timestamp="1588341698887">
+    <state width="2517" height="285" key="GridCell.Tab.0.center/0.0.1280.689/-2560.-93.2560.1410@-2560.-93.2560.1410" timestamp="1588342589887" />
+    <state width="2517" height="285" key="GridCell.Tab.0.left" timestamp="1588342589887">
       <screen x="-2560" y="-93" width="2560" height="1410" />
     </state>
     <state width="1237" height="187" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1588339268709" />
-    <state width="2517" height="285" key="GridCell.Tab.0.left/0.0.1280.689/-2560.-93.2560.1410@-2560.-93.2560.1410" timestamp="1588341698887" />
-    <state width="2517" height="285" key="GridCell.Tab.0.right" timestamp="1588341698887">
+    <state width="2517" height="285" key="GridCell.Tab.0.left/0.0.1280.689/-2560.-93.2560.1410@-2560.-93.2560.1410" timestamp="1588342589887" />
+    <state width="2517" height="285" key="GridCell.Tab.0.right" timestamp="1588342589887">
       <screen x="-2560" y="-93" width="2560" height="1410" />
     </state>
     <state width="1237" height="187" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1588339268710" />
-    <state width="2517" height="285" key="GridCell.Tab.0.right/0.0.1280.689/-2560.-93.2560.1410@-2560.-93.2560.1410" timestamp="1588341698887" />
+    <state width="2517" height="285" key="GridCell.Tab.0.right/0.0.1280.689/-2560.-93.2560.1410@-2560.-93.2560.1410" timestamp="1588342589887" />
     <state x="59" y="0" key="SettingsEditor" timestamp="1588333033827">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="59" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1588333033827" />
     <state x="-2442" y="190" key="SettingsEditor/0.0.1280.689/-2560.-93.2560.1410@-2560.-93.2560.1410" timestamp="1588231303932" />
-    <state x="-2218" y="436" key="com.intellij.ide.util.TipDialog" timestamp="1588339450576">
+    <state x="-2218" y="436" key="com.intellij.ide.util.TipDialog" timestamp="1588342063259">
       <screen x="-2560" y="-93" width="2560" height="1410" />
     </state>
-    <state x="-2218" y="436" key="com.intellij.ide.util.TipDialog/0.0.1280.689/-2560.-93.2560.1410@-2560.-93.2560.1410" timestamp="1588339450576" />
+    <state x="-2218" y="436" key="com.intellij.ide.util.TipDialog/0.0.1280.689/-2560.-93.2560.1410@-2560.-93.2560.1410" timestamp="1588342063259" />
     <state x="181" y="0" key="new project wizard" timestamp="1588319092143">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
