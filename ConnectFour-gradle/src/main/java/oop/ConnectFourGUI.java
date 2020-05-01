@@ -20,13 +20,18 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.effect.Lighting;
 import javafx.scene.effect.Light;
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Point2D;
 
+import java.io.BufferedWriter;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,17 +41,22 @@ import java.util.stream.IntStream;
 
 
 
-public class MustRuut extends Application {
+public class ConnectFourGUI extends Application {
 
+    private Stage peaLava;
     private static final int TILE_SIZE = 80;
-    private static final int COLUMNS = 7;
-    private static final int ROWS = 6;
-    private boolean redMove = true;
-    private Nupp[][] ruudustik = new Nupp[COLUMNS][ROWS];
+    private static final int VEERUD = 7;
+    private static final int READ = 6;
+    private boolean punaseKäik = true;
+    private Nupp[][] ruudustik = new Nupp[VEERUD][READ];
     private Pane nuppJuur = new Pane();
+    private String TULEMUSTE_FAIL = "mängude_tulemused.txt";
 
     @Override
     public void start(Stage peaLava) throws NimeAsemelNumber {
+
+        this.peaLava = peaLava;
+
         // Connect Four pealkiri
         Text pealkiri = new Text();
         pealkiri.setText("CONNECT FOUR");
@@ -197,14 +207,9 @@ public class MustRuut extends Application {
         } catch (NumberFormatException e){
             onNumber = false;
         }
-        if (onNumber)
+        if (onNumber || text.equals("")) //Lisasin selle, et kasutaja ei saa tühja sõne lisada
             throw new NimeAsemelNumber("Sisestasite nime asemel numbri!");
         return onNumber;
-    }
-
-    private Mangija teineMangija(String text, String kollane) {
-        Mangija teineMangija = new Mangija(text, kollane);
-        return teineMangija;
     }
 
     private Mangija esimeneMangija(String text, String punane) {
@@ -212,6 +217,13 @@ public class MustRuut extends Application {
         return esimeneMangija;
     }
 
+    private Mangija teineMangija(String text, String kollane) {
+        Mangija teineMangija = new Mangija(text, kollane);
+        return teineMangija;
+    }
+
+
+    //loob mängulaua sisu
     private Parent looSisu() {
         Pane juur = new Pane();
         juur.getChildren().add(nuppJuur);
@@ -221,12 +233,14 @@ public class MustRuut extends Application {
         juur.getChildren().addAll(looVeerud());
 
         return juur;
-    }
+    } //looSisu
 
+    //loob sinise mängulaua ilma nuppudeta
     private Shape looRuudustik() {
-        Shape kujund = new Rectangle((COLUMNS + 1) * TILE_SIZE, (ROWS + 1) * TILE_SIZE);
-        for (int y = 0; y < ROWS; y++) {
-            for (int x = 0; x < COLUMNS; x++) {
+        Shape kujund = new Rectangle((VEERUD + 1) * TILE_SIZE, (READ + 1) * TILE_SIZE);
+
+        for (int y = 0; y < READ; y++) {
+            for (int x = 0; x < VEERUD; x++) {
                 Circle ring = new Circle(TILE_SIZE / 2);
                 ring.setCenterX(TILE_SIZE / 2);
                 ring.setCenterY(TILE_SIZE / 2);
@@ -234,8 +248,9 @@ public class MustRuut extends Application {
                 ring.setTranslateY(y * (TILE_SIZE + 5) + TILE_SIZE / 4);
 
                 kujund = Shape.subtract(kujund, ring);
-            }
-        }
+            } //for
+        } //for
+
         Light.Distant valgus = new Light.Distant();
         valgus.setAzimuth(45.0);
         valgus.setElevation(30.0);
@@ -248,12 +263,13 @@ public class MustRuut extends Application {
         kujund.setEffect(valgustus);
 
         return kujund;
-    }
+    } //looRuudustik
 
+    //loob veerud, millele hiirega peale minnes saab nuppe lisada
     private List<Rectangle> looVeerud() {
         List<Rectangle> list = new ArrayList<>();
-        for (int x = 0; x < COLUMNS; x++) {
-            Rectangle ristkülik = new Rectangle(TILE_SIZE, (ROWS + 1) * TILE_SIZE);
+        for (int x = 0; x < VEERUD; x++) {
+            Rectangle ristkülik = new Rectangle(TILE_SIZE, (READ + 1) * TILE_SIZE);
             ristkülik.setTranslateX(x * (TILE_SIZE + 5) + TILE_SIZE / 4);
             ristkülik.setFill(Color.TRANSPARENT);
 
@@ -261,43 +277,45 @@ public class MustRuut extends Application {
             ristkülik.setOnMouseExited(e -> ristkülik.setFill(Color.TRANSPARENT));
 
             final int veerg = x;
-            ristkülik.setOnMouseClicked(e -> lisaNupp(new Nupp(redMove), veerg));
+            ristkülik.setOnMouseClicked(e -> lisaNupp(new Nupp(punaseKäik), veerg));
 
             list.add(ristkülik);
-        }
+        } //for
         return list;
-    }
+    } //looVeerud
 
-    private void lisaNupp(Nupp nupp, int column) {
-        int row = ROWS - 1;
+    //lisab nupu veergu
+    private void lisaNupp(Nupp nupp, int veerg) {
+        int rida = READ - 1;
         do {
-            if (!getNupp(column, row).isPresent()) {
+            if (!getNupp(veerg, rida).isPresent()) {
                 break;
             }
-            row--;
-        } while (row >= 0);
+            rida--;
+        } while (rida >= 0);
 
-        if (row < 0) {
+        if (rida < 0) {
             return;
         }
 
-        ruudustik[column][row] = nupp;
+        ruudustik[veerg][rida] = nupp;
         nuppJuur.getChildren().add(nupp);
-        nupp.setTranslateX(column * (TILE_SIZE + 5) + TILE_SIZE / 4);
+        nupp.setTranslateX(veerg * (TILE_SIZE + 5) + TILE_SIZE / 4);
 
-        final int praeguneRida = row;
+        final int praeguneRida = rida;
 
         TranslateTransition animatsioon = new TranslateTransition(Duration.seconds(0.5), nupp);
-        animatsioon.setToY(row * (TILE_SIZE + 5) + TILE_SIZE / 4);
+        animatsioon.setToY(rida * (TILE_SIZE + 5) + TILE_SIZE / 4);
         animatsioon.setOnFinished(e -> {
-            if (mangLopetatud(column, praeguneRida)) { //gameended
-                mangLabi(); //gameover
+            if (mangLopetatud(veerg, praeguneRida)) {
+                mangLabi();
             }
-            redMove = !redMove;
-        });
+            punaseKäik = !punaseKäik;
+        }); //setOnFinished
         animatsioon.play();
-    }
+    } //lisaNupp
 
+    //kontrollib, kas mäng on lõpetatud
     private boolean mangLopetatud(int column, int row) {
         List<Point2D> vertikaalne = IntStream.rangeClosed(row - 3, row + 3)
                 .mapToObj(r -> new Point2D(column, r))
@@ -312,77 +330,151 @@ public class MustRuut extends Application {
                 .mapToObj(i -> topLeft.add(i, i))
                 .collect(Collectors.toList());
 
+        Point2D topRight = new Point2D(column - 3, row + 3);
+        List<Point2D> diagonaal3 = IntStream.rangeClosed(0, 6)
+                .mapToObj(i -> topRight.add(i, i))
+                .collect(Collectors.toList());
+
+        Point2D botRight = new Point2D(column - 3, row + 3);
+        List<Point2D> diagonaal4 = IntStream.rangeClosed(0, 6)
+                .mapToObj(i -> botRight.add(i, -i))
+                .collect(Collectors.toList());
+
         Point2D botLeft = new Point2D(column - 3, row - 3);
         List<Point2D> diagonaal2 = IntStream.rangeClosed(0, 6)
                 .mapToObj(i -> botLeft.add(i, -i))
                 .collect(Collectors.toList());
-        return kontrolliVahemik(vertikaalne) || kontrolliVahemik(horisontaalne)
-                || kontrolliVahemik(diagonaal1) || kontrolliVahemik(diagonaal2);
-    }
 
+        return kontrolliVahemik(vertikaalne) || kontrolliVahemik(horisontaalne)
+                || kontrolliVahemik(diagonaal1) || kontrolliVahemik(diagonaal2)
+                || kontrolliVahemik(diagonaal3) || kontrolliVahemik(diagonaal4);
+    } //mangLopetatud
+
+    //kontrollib, kas saab 4 samasugust nupp on järjest
     private boolean kontrolliVahemik(List<Point2D> punktid) {
         int ahel = 0;
         for (Point2D p : punktid) {
             int column = (int) p.getX();
             int row = (int) p.getY();
 
-            Nupp nupp = getNupp(column, row).orElse(new Nupp(!redMove));
-            if (nupp.red == redMove) {
+            Nupp nupp = getNupp(column, row).orElse(new Nupp(!punaseKäik));
+            if (nupp.punane == punaseKäik) {
                 ahel++;
                 if (ahel == 4) {
                     return true;
-                }
-            } else {
+                } //if
+            } //if
+            else {
                 ahel = 0;
             }
-        }
+        } //for
         return false;
-    }
+    } //kontrolliVahemik
 
+    //kui mäng on läbi
     private void mangLabi() {
+        //Kirjutab faili mängijate nimed, võitja ja toimumisaja
+        //LISA SIIA MANGIJATE NIMED JA VOITJA
+        kirjutaFaili("Tsau", "Nora", "Nora", TULEMUSTE_FAIL);
+
+        //SELLE LOOGIKA PÕHJAL PEAKS SAAMA KÄTTE, KES VÕITIS
+        //System.out.println("Võitja: " + (punaseKäik ? "punane" : "kollane"));
+
+        //TEIST MOODI KIRJUTATUNA
+        /*
+        if (punaseKäik) {
+            võitja = "punane";
+        }
+        else {
+            võitja = "kollane";
+        }
+         */
+
+        //loeb failist andmed
+        System.out.println(loeFailist(TULEMUSTE_FAIL));
+        Text varasemad_tulemused = new Text(10,50,loeFailist(TULEMUSTE_FAIL));
+
         Stage voitja = new Stage();
-        Label voitjanimi = new Label("Palju õnne! Võitja: " + (redMove ? "punane" : "kollane"));
+        Label voitjanimi = new Label("Palju õnne! Võitja: " + (punaseKäik ? "punane" : "kollane"));
         voitjanimi.setTextFill(Color.GOLD);
         voitjanimi.setStyle("-fx-font-size: 32");
         Button uusMang = new Button("Uus mäng");
-        VBox vBox = new VBox(voitjanimi, uusMang);
+        VBox vBox = new VBox(voitjanimi, varasemad_tulemused, uusMang);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(20);
         BackgroundFill backgroundFill = new BackgroundFill(Color.STEELBLUE, CornerRadii.EMPTY, Insets.EMPTY);
         Background background = new Background(backgroundFill);
         vBox.setBackground(background);
+
+        //loob uue mängulaua
         uusMang.setOnMouseClicked(e -> {
             voitja.hide();
-            // Siia võiks lisada, et ruudustik oleks tühi ja saaks uuesti mängima hakata.
+            peaLava.hide();
+            ruudustik = new Nupp[VEERUD][READ];
+            nuppJuur.getChildren().clear();
+            peaLava.setScene(new Scene(looSisu()));
+            peaLava.show();
         });
+
         Scene voitjaScene = new Scene(vBox, 600, 300);
         voitja.setScene(voitjaScene);
         voitja.show();
-        System.out.println("Võitja: " + (redMove ? "punane" : "kollane"));
-    }
+    } //mangLabi
 
-    private Optional<Nupp> getNupp(int column, int row) {
-        if (column < 0 || column >= COLUMNS
-                || row < 0 || row >= ROWS) {
+    // tagastab koordinaatidel oleva nupu
+    private Optional<Nupp> getNupp(int veerg, int rida) {
+        if (veerg < 0 || veerg >= VEERUD
+                || rida < 0 || rida >= READ) {
             return Optional.empty();
         }
-        return Optional.ofNullable(ruudustik[column][row]);
-    }
+        return Optional.ofNullable(ruudustik[veerg][rida]);
+    } //getNupp
 
+    // nupu klass
     private static class Nupp extends Circle {
-        private final boolean red;
+        private final boolean punane;
 
-        public Nupp(boolean red) {
-            super(TILE_SIZE / 2, red ? Color.RED : Color.YELLOW);
-            this.red = red;
+        public Nupp(boolean punane) {
+            super(TILE_SIZE / 2, punane ? Color.RED : Color.YELLOW);
+            this.punane = punane;
 
             setCenterX(TILE_SIZE / 2);
             setCenterY(TILE_SIZE / 2);
+        } //Nupp konstruktor
+    } //Nupp
+
+    //kirjutab faili mängu andmed
+    public static void kirjutaFaili (String mangija1, String mangija2, String voitja, String failinimi){
+        String sisu = "Omavahel mängisid " + mangija1 + " ja " + mangija2 + ". Mängu võitis " + voitja
+                        + "! Kuupäev: " +  new java.sql.Timestamp(System.currentTimeMillis()) + ".\n";
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(failinimi, true))) {
+            bw.write(sisu);
+            bw.close();
+        } catch (IOException e) {
+            System.out.println("Tekkis viga faili kirjutamisel: " + e);
         }
-    }
+    } //kirjutaFaili
+
+    //loeb failist mängude andmed
+    public static String loeFailist(String failinimi){
+        StringBuilder sisu = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new FileReader(failinimi))) {
+            String rida = br.readLine();
+            while (rida != null) {
+                sisu.append(rida);
+                sisu.append("\n");
+                rida = br.readLine();
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Faili ei leidu.");
+        }
+        catch (IOException e) {
+            System.out.println("IOException " + e);
+        }
+        return sisu.toString();
+    } //loeFailist
 
     public static void main(String[] args) {
-
         launch(args);
-    }
-}
+    } //main
+} //ConnectFourGUI
