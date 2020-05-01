@@ -135,4 +135,12 @@ public class Maatriks {
         }
         return true;
     }
+
+    public int getRidade_arv() {
+        return ridade_arv;
+    }
+
+    public int getVeergude_arv() {
+        return veergude_arv;
+    }
 }

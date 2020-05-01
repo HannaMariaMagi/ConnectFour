@@ -14,8 +14,35 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import javafx.scene.Parent;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+import javafx.scene.effect.Lighting;
+import javafx.scene.effect.Light;
+import javafx.animation.TranslateTransition;
+import javafx.geometry.Point2D;
+
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+
 
 public class MustRuut extends Application {
+
+    private static final int TILE_SIZE = 80;
+    private static final int COLUMNS = 7;
+    private static final int ROWS = 6;
+    private boolean redMove = true;
+    private Nupp[][] ruudustik = new Nupp[COLUMNS][ROWS];
+    private Pane nuppJuur = new Pane();
 
     @Override
     public void start(Stage peaLava) throws Exception {
@@ -141,16 +168,16 @@ public class MustRuut extends Application {
                     numbrid.show();
 
                     // mängulaua loomine
-                    Maatriks laud = new Maatriks(ridadeArv,veergudeArv, voiduTingimus);
+                    Maatriks laud = new Maatriks(ridadeArv, veergudeArv, voiduTingimus);
                 }
             });
         });
 
-        VBox vBox = new VBox(pealkiri,sissejuhatus, startButton);
+        VBox vBox = new VBox(pealkiri, sissejuhatus, startButton);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(30);
 
-        Scene scene = new Scene(vBox,1000,600);
+        Scene scene = new Scene(vBox, 1000, 600);
         BackgroundFill backgroundFill = new BackgroundFill(Color.STEELBLUE, CornerRadii.EMPTY, Insets.EMPTY);
         Background background = new Background(backgroundFill);
         vBox.setBackground(background);
@@ -159,6 +186,161 @@ public class MustRuut extends Application {
         peaLava.setScene(scene);
         peaLava.setResizable(false);
         peaLava.show();
+
+        // SIIT HAKKAB MÄNGULAUD
+        peaLava.setScene(new Scene(looSisu()));
+        peaLava.show();
+    }
+
+    private Parent looSisu() {
+        Pane juur = new Pane();
+        juur.getChildren().add(nuppJuur);
+
+        Shape ruudustik = looRuudustik();
+        juur.getChildren().add(ruudustik);
+        juur.getChildren().addAll(looVeerud());
+
+        return juur;
+    }
+
+    private Shape looRuudustik() {
+        Shape kujund = new Rectangle((COLUMNS + 1) * TILE_SIZE, (ROWS + 1) * TILE_SIZE);
+        for (int y = 0; y < ROWS; y++) {
+            for (int x = 0; x < COLUMNS; x++) {
+                Circle ring = new Circle(TILE_SIZE / 2);
+                ring.setCenterX(TILE_SIZE / 2);
+                ring.setCenterY(TILE_SIZE / 2);
+                ring.setTranslateX(x * (TILE_SIZE + 5) + TILE_SIZE / 4);
+                ring.setTranslateY(y * (TILE_SIZE + 5) + TILE_SIZE / 4);
+
+                kujund = Shape.subtract(kujund, ring);
+            }
+        }
+        Light.Distant valgus = new Light.Distant();
+        valgus.setAzimuth(45.0);
+        valgus.setElevation(30.0);
+
+        Lighting valgustus = new Lighting();
+        valgustus.setLight(valgus);
+        valgustus.setSurfaceScale(5.0);
+
+        kujund.setFill(Color.BLUE);
+        kujund.setEffect(valgustus);
+
+        return kujund;
+    }
+
+    private List<Rectangle> looVeerud() {
+        List<Rectangle> list = new ArrayList<>();
+        for (int x = 0; x < COLUMNS; x++) {
+            Rectangle ristkülik = new Rectangle(TILE_SIZE, (ROWS + 1) * TILE_SIZE);
+            ristkülik.setTranslateX(x * (TILE_SIZE + 5) + TILE_SIZE / 4);
+            ristkülik.setFill(Color.TRANSPARENT);
+
+            ristkülik.setOnMouseEntered(e -> ristkülik.setFill(Color.rgb(200, 200, 50, 0.3)));
+            ristkülik.setOnMouseExited(e -> ristkülik.setFill(Color.TRANSPARENT));
+
+            final int veerg = x;
+            ristkülik.setOnMouseClicked(e -> lisaNupp(new Nupp(redMove), veerg));
+
+            list.add(ristkülik);
+        }
+        return list;
+    }
+
+    private void lisaNupp(Nupp nupp, int column) {
+        int row = ROWS - 1;
+        do {
+            if (!getNupp(column, row).isPresent()) {
+                break;
+            }
+            row--;
+        } while (row >= 0);
+
+        if (row < 0) {
+            return;
+        }
+
+        ruudustik[column][row] = nupp;
+        nuppJuur.getChildren().add(nupp);
+        nupp.setTranslateX(column * (TILE_SIZE + 5) + TILE_SIZE / 4);
+
+        final int praeguneRida = row;
+
+        TranslateTransition animatsioon = new TranslateTransition(Duration.seconds(0.5), nupp);
+        animatsioon.setToY(row * (TILE_SIZE + 5) + TILE_SIZE / 4);
+        animatsioon.setOnFinished(e -> {
+            if (mangLopetatud(column, praeguneRida)) { //gameended
+                mangLabi(); //gameover
+            }
+            redMove = !redMove;
+        });
+        animatsioon.play();
+    }
+
+    private boolean mangLopetatud(int column, int row) {
+        List<Point2D> vertikaalne = IntStream.rangeClosed(row - 3, row + 3)
+                .mapToObj(r -> new Point2D(column, r))
+                .collect(Collectors.toList());
+
+        List<Point2D> horisontaalne = IntStream.rangeClosed(column - 3, column + 3)
+                .mapToObj(c -> new Point2D(c, row))
+                .collect(Collectors.toList());
+
+        Point2D topLeft = new Point2D(column - 3, row - 3);
+        List<Point2D> diagonaal1 = IntStream.rangeClosed(0, 6)
+                .mapToObj(i -> topLeft.add(i, i))
+                .collect(Collectors.toList());
+
+        Point2D botLeft = new Point2D(column - 3, row - 3);
+        List<Point2D> diagonaal2 = IntStream.rangeClosed(0, 6)
+                .mapToObj(i -> botLeft.add(i, -i))
+                .collect(Collectors.toList());
+        return kontrolliVahemik(vertikaalne) || kontrolliVahemik(horisontaalne)
+                || kontrolliVahemik(diagonaal1) || kontrolliVahemik(diagonaal2);
+    }
+
+    private boolean kontrolliVahemik(List<Point2D> punktid) {
+        int ahel = 0;
+        for (Point2D p : punktid) {
+            int column = (int) p.getX();
+            int row = (int) p.getY();
+
+            Nupp nupp = getNupp(column, row).orElse(new Nupp(!redMove));
+            if (nupp.red == redMove) {
+                ahel++;
+                if (ahel == 4) {
+                    return true;
+                }
+            } else {
+                ahel = 0;
+            }
+        }
+        return false;
+    }
+
+    private void mangLabi() {
+        System.out.println("Võitja: " + (redMove ? "punane" : "kollane"));
+    }
+
+    private Optional<Nupp> getNupp(int column, int row) {
+        if (column < 0 || column >= COLUMNS
+                || row < 0 || row >= ROWS) {
+            return Optional.empty();
+        }
+        return Optional.ofNullable(ruudustik[column][row]);
+    }
+
+    private static class Nupp extends Circle {
+        private final boolean red;
+
+        public Nupp(boolean red) {
+            super(TILE_SIZE / 2, red ? Color.RED : Color.YELLOW);
+            this.red = red;
+
+            setCenterX(TILE_SIZE / 2);
+            setCenterY(TILE_SIZE / 2);
+        }
     }
 
     public static void main(String[] args) {
