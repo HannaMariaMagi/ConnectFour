@@ -56,18 +56,25 @@ Start meetod kontrollib, kui kasOnNumber meetod on tagastanud true, siis visatak
 
 Meetodid teineMangija(String text, String kollane) ja esimeneMangija(String text, String punane) väärtustavad isendiväljade esimeneMangija ja teineMangija nime ja värvi vastavalt meetodile kaasa antud väärtustega.
 
-Meetod looSisu  
-Meetod looVeerud
-Meetod lisaNupp
-Meetod mangLopetatud
-Meetod kontrolliVahemik
+Meetod looSisu loob mängulaua ja kõik sellega kaasneva. 
+
+Meetod looVeerud loob veerud, mille kohale hiirega minnes muutub veerg helekollaseks. Veerule vajutades hiirega, lisatakse sinna veergu nupp.
+
+Meetod lisaNupp lisab vajutatud veergu nupu. Kõigepealt kontrollitakse, kas veerus on juba nupud olemas. kui leitakse koht, kus nuppu pole, siis lisatakse sinna animatsiooniga nupp. Pärast animatsiooni käiku antakse käik teise mängija kätte.
+
+Meetod mangLopetatud on kontrollmeetod, mis kontrollib, kas viimasena asetatud nupuga saadi 4 samavärvilist nuppu ritta, veergu või diagonaali kokku. Selleks kasutab ta Point2D Listi, et leida, mis värvi nupud on järjest. Meetod tagastab tõese, kui leidub mingi võidutingimus.
+
+Meetod kontrolliVahemik kontrollib, kas antud Point2D Listis leidub 4 samavärvilist nuppu, mis on järjest.
 
 Meetod mangLabi esmalt väärtustab mangija1 esimeseMangija nimega ja mangija2 teiseMangija nimega. Kui viimane käik oli punase nupu käik, siis võitjaks on esimene mängija, teisel juhul on teine mängija võitjaks. Seejärel kutsutakse välja meetod kirjutaFaili. Seejärel luuakse uus aken, kus kuvatakse faili sisu ja seekordse mängu võitja. Luuakse Button uusMang, mille vajutamisel luuakse uus (tühi) mängulaud. 
 
-Meetod getNupp
-Meetod nupp
-Meetod kirjutaFaili
-Meetod loeFailist
+Meetod getNupp tagastab antud koordinaatidel oleva nupu.
+
+Klass nupp on loodud nuppude loomiseks. Luuakse kas punane või kollane nupp.
+
+Meetod kirjutaFaili kirjutab BufferedWriteriga mängijate andmed, võitja ja kuupäeva faili. Kui faili pole veel loodud, siis ta loob selle faili. Kui fail on loodud, siis lisab ta sinna uue rea.
+
+Meetod loeFailist loeb failist BufferedReaderig kõik read ning lisab need ühte stringi. iga rida on stringis eraldatud reavahetusega.
 
 Meetod main launchib kogu programmi sisu. 
 
@@ -75,14 +82,16 @@ Projekti tegemise protsess:
 
 1. rühmatöö: Mitu nädalat enne programmi kirjutamist said rühmaliikmed kokku ning panid paika projekti teema, eesmärgi, ajakava ning arutasid läbi programmi üldise olemuse. Seejärel tegi Hanna GitHubi projekti ning lõi algsed klassid. Seejärel keskendus Hanna Mängija ja Maatriksi klassile lisades sinna vajalikud meetodid ja isendiväljad. Nora ülesanne oli luua kasutajaga suhtlus ja sealjuures keskendus tervele Peaklassile ning lisas Maatriksi klassi meetodi kontrolliViik. Nora kirjutas valmis rühmatöö kirjelduse, mida hiljem täiendas ka Hanna. Aega kulus projekti tegemiseks umbes kolm päeva iga päev ligikaudu neli tundi.
 
-2. rühmatöö: Rühmaliikmed leppisid kokku kohe alguses, et esimene ja teine rühmatöö saavad olema omavahel seotud. GitHubi projekt oli juba olemas ja seega saime hakata kohe programmi muutma kasutades Gradlet. Täiustasime kordamööda porgrammi ning olime pidevas suhtluses. Nora lõi uue kausta, kus asusid nii eelmise rühmatöö failid, kui ka uus gradle fail. Nora ülesandeks jäi kuvada sissejuhatav tekst, küsida kasutajatelt nende nimed ning selle alusel luua kaks uut Mangija klassi isendit. Samuti erindi klassi loomine ning erindi kuvamine kasutajatele, ühtlasi ka mängu võitja kuvamine ja erinevate akende vahel liikumine. Hanna lõi graafilise mängulaua, selle kasutamise, toimimise ja võidu kontrollimise ning uue mängu alustamise. Ühtlasi oli Hanna ülesandeks faili kirjutamine ja failist lugemine. Nora kirjutas projekti kirjelduse, mida hiljem täiendas Hanna. Aega kulus projekti tegemiseks umbes kaks päeva, iga päev kuus tundi. 
+2. rühmatöö: Rühmaliikmed leppisid kokku kohe alguses, et esimene ja teine rühmatöö saavad olema omavahel seotud. GitHubi projekt oli juba olemas ja seega saime hakata kohe programmi muutma kasutades Gradle-it. Täiustasime kordamööda porgrammi ning olime pidevas suhtluses. Nora lõi uue kausta, kus asusid nii eelmise rühmatöö failid, kui ka uus gradle fail. Nora ülesandeks jäi kuvada sissejuhatav tekst, küsida kasutajatelt nende nimed ning selle alusel luua kaks uut Mangija klassi isendit. Samuti erindi klassi loomine ning erindi kuvamine kasutajatele, ühtlasi ka mängu võitja kuvamine ja erinevate akende vahel liikumine. Hanna lõi graafilise mängulaua, selle kasutamise, toimimise ja võidu kontrollimise ning uue mängu alustamise. Ühtlasi oli Hanna ülesandeks faili kirjutamine ja failist lugemine. Nora kirjutas projekti kirjelduse, mida hiljem täiendas Hanna. Aega kulus projekti tegemiseks umbes kaks päeva, iga päev kuus tundi. 
 
 Hinnang: 
 
 1. rühmatöö: Tänu heale ettevalmistusele sujus meie koostöö ning programmi kirjutamine väga hästi. Olime koos läbi mõelnud väga täpselt, kuidas me programmi kirjutame ning millised klassid omavahel seome. Keerulisemad kohad olid nt võidu kontrolli läbiviimine ning mängu tsüklisse saamine.
 
 Tänu sellele, et oleme varasemalt GitHubi kasutanud, siis tuli ka see mugavamalt välja kui varem. Pisemad takistused või probleemid esinesid, kuid suutsime need koos kiirelt lahendada. 
-rühmatöö: Seekord alustamise rühmatööga veidi hiljem, kuid sellest hoolimata saime kõikide asjadega hästi hakkama. Graafiline kujutamine osutus päris keeruliseks. Eriti valmistas raskusi sisestatud andmete kasutamine ning tagamine, et ekraani suuruse muutmisel kõik toimiks tavapäraselt. GitHubiga seekord probleeme ei esinenud. 
+
+2. rühmatöö: Seekord alustamise rühmatööga veidi hiljem, kuid sellest hoolimata saime kõikide asjadega hästi hakkama. Graafiline kujutamine osutus päris keeruliseks. Raske oli luua ja välja mõelda meetodit, kuidas nuppe kuvada. Eriti valmistas raskusi sisestatud andmete kasutamine ning tagamine, et ekraani suuruse muutmisel kõik toimiks tavapäraselt. GitHubiga seekord probleeme ei esinenud. 
+
 
 Programmi testimine: 
 
