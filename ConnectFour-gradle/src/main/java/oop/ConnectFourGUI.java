@@ -51,6 +51,8 @@ public class ConnectFourGUI extends Application {
     private Nupp[][] ruudustik = new Nupp[VEERUD][READ];
     private Pane nuppJuur = new Pane();
     private String TULEMUSTE_FAIL = "mängude_tulemused.txt";
+    private Mangija esimeneMangija = new Mangija("","");
+    private Mangija teineMangija = new Mangija("", "");
 
     @Override
     public void start(Stage peaLava) throws NimeAsemelNumber {
@@ -80,6 +82,7 @@ public class ConnectFourGUI extends Application {
         startButton.setOnMouseClicked(event -> {
             peaLava.hide();
             Stage nimi = new Stage();
+            nimi.setResizable(false);
 
             // Esimese mängija nime sisestamise koht, mis loob Mangija isendi, kelle värviks on punane.
             Label esimeseNimi = new Label("Sisestage esimese mängija nimi: ");
@@ -93,10 +96,11 @@ public class ConnectFourGUI extends Application {
                     esimeneMangija(textField.getText(), "punane");
                 } catch (NimeAsemelNumber nimeAsemelNumber){
                     Stage erind = new Stage();
+                    erind.setResizable(false);
 
-                    Label tekkisErind = new Label("Sisestasid nime asemel numbri!");
+                    Label tekkisErind = new Label(nimeAsemelNumber.getMessage());
                     tekkisErind.setTextFill(Color.GOLD);
-                    tekkisErind.setStyle("-fx-font-size: 32");
+                    tekkisErind.setStyle("-fx-font-size: 24");
 
                     Button close = new Button("Close");
                     close.setOnMouseClicked(event2 -> {
@@ -131,6 +135,7 @@ public class ConnectFourGUI extends Application {
                     teineMangija(textField2.getText(), "kollane");
                 } catch (NimeAsemelNumber nimeAsemelNumber){
                     Stage erind = new Stage();
+                    erind.setResizable(false);
 
                     Label tekkisErind = new Label(nimeAsemelNumber.getMessage());
                     tekkisErind.setTextFill(Color.GOLD);
@@ -207,19 +212,19 @@ public class ConnectFourGUI extends Application {
         } catch (NumberFormatException e){
             onNumber = false;
         }
-        if (onNumber || text.equals("")) //Lisasin selle, et kasutaja ei saa tühja sõne lisada
-            throw new NimeAsemelNumber("Sisestasite nime asemel numbri!");
+        if (onNumber || text.equals(""))
+            throw new NimeAsemelNumber("Sisestasite nime asemel numbri või jätsite tühjaks!");
         return onNumber;
     }
 
-    private Mangija esimeneMangija(String text, String punane) {
-        Mangija esimeneMangija = new Mangija(text, punane);
-        return esimeneMangija;
+    private void esimeneMangija(String text, String varv) {
+        esimeneMangija.setNimi(text);
+        esimeneMangija.setVarv(varv);
     }
 
-    private Mangija teineMangija(String text, String kollane) {
-        Mangija teineMangija = new Mangija(text, kollane);
-        return teineMangija;
+    private void teineMangija(String text, String varv) {
+        teineMangija.setNimi(text);
+        teineMangija.setVarv(varv);
     }
 
 
@@ -374,28 +379,24 @@ public class ConnectFourGUI extends Application {
     //kui mäng on läbi
     private void mangLabi() {
         //Kirjutab faili mängijate nimed, võitja ja toimumisaja
-        //LISA SIIA MANGIJATE NIMED JA VOITJA
-        kirjutaFaili("Tsau", "Nora", "Nora", TULEMUSTE_FAIL);
 
-        //SELLE LOOGIKA PÕHJAL PEAKS SAAMA KÄTTE, KES VÕITIS
-        //System.out.println("Võitja: " + (punaseKäik ? "punane" : "kollane"));
+        String mangija1 = esimeneMangija.getNimi();
+        String mangija2 = teineMangija.getNimi();
+        String voitja;
 
-        //TEIST MOODI KIRJUTATUNA
-        /*
-        if (punaseKäik) {
-            võitja = "punane";
+        if (punaseKäik){
+            voitja = esimeneMangija.getNimi();
+        } else {
+            voitja = teineMangija.getNimi();
         }
-        else {
-            võitja = "kollane";
-        }
-         */
+        kirjutaFaili(mangija1, mangija2, voitja, TULEMUSTE_FAIL);
 
         //loeb failist andmed
         System.out.println(loeFailist(TULEMUSTE_FAIL));
         Text varasemad_tulemused = new Text(10,50,loeFailist(TULEMUSTE_FAIL));
-
-        Stage voitja = new Stage();
-        Label voitjanimi = new Label("Palju õnne! Võitja: " + (punaseKäik ? "punane" : "kollane"));
+        Stage võitja = new Stage();
+        võitja.setResizable(false);
+        Label voitjanimi = new Label("Palju õnne! Võitja: " + (punaseKäik ? esimeneMangija.getNimi() : teineMangija.getNimi()));
         voitjanimi.setTextFill(Color.GOLD);
         voitjanimi.setStyle("-fx-font-size: 32");
         Button uusMang = new Button("Uus mäng");
@@ -408,7 +409,7 @@ public class ConnectFourGUI extends Application {
 
         //loob uue mängulaua
         uusMang.setOnMouseClicked(e -> {
-            voitja.hide();
+            võitja.hide();
             peaLava.hide();
             ruudustik = new Nupp[VEERUD][READ];
             nuppJuur.getChildren().clear();
@@ -417,8 +418,8 @@ public class ConnectFourGUI extends Application {
         });
 
         Scene voitjaScene = new Scene(vBox, 600, 300);
-        voitja.setScene(voitjaScene);
-        voitja.show();
+        võitja.setScene(voitjaScene);
+        võitja.show();
     } //mangLabi
 
     // tagastab koordinaatidel oleva nupu

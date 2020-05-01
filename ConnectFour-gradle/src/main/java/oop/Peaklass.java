@@ -1,3 +1,4 @@
+/*
 package oop;
 
 import java.util.Scanner;
@@ -73,4 +74,4 @@ public class Peaklass {
         }
         System.out.println("Mäng läbi.");
     }
-}
+}*/

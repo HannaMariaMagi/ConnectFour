@@ -2,26 +2,26 @@ package oop;
 
 public class Mangija {
     private String nimi;
-    private String nupp;
+    private String varv;
 
-    public Mangija(String nimi, String nupp) {
+    public Mangija(String nimi, String varv) {
         this.nimi = nimi;
-        this.nupp = nupp;
+        this.varv = varv;
     }
 
     public void setNimi(String nimi) {
         this.nimi = nimi;
     }
 
-    public void setNupp(String nupp) {
-        this.nupp = nupp;
+    public void setVarv(String nupp) {
+        this.varv = varv;
     }
 
     public String getNimi() {
         return nimi;
     }
 
-    public String getNupp() {
-        return nupp;
+    public String getVarv() {
+        return varv;
     }
 }
