@@ -122,7 +122,7 @@ public class MustRuut extends Application {
                 } catch (NimeAsemelNumber nimeAsemelNumber){
                     Stage erind = new Stage();
 
-                    Label tekkisErind = new Label("Sisestasid nime asemel numbri!");
+                    Label tekkisErind = new Label(nimeAsemelNumber.getMessage());
                     tekkisErind.setTextFill(Color.GOLD);
                     tekkisErind.setStyle("-fx-font-size: 32");
 
@@ -151,6 +151,7 @@ public class MustRuut extends Application {
             Button mängulaud = new Button("Loo mängulaud");
             mängulaud.setOnMouseClicked(e -> {
                 // SIIT HAKKAB MÄNGULAUD
+                nimi.hide();
                 peaLava.setScene(new Scene(looSisu()));
                 peaLava.show();
             });
@@ -339,6 +340,24 @@ public class MustRuut extends Application {
     }
 
     private void mangLabi() {
+        Stage voitja = new Stage();
+        Label voitjanimi = new Label("Palju õnne! Võitja: " + (redMove ? "punane" : "kollane"));
+        voitjanimi.setTextFill(Color.GOLD);
+        voitjanimi.setStyle("-fx-font-size: 32");
+        Button uusMang = new Button("Uus mäng");
+        VBox vBox = new VBox(voitjanimi, uusMang);
+        vBox.setAlignment(Pos.CENTER);
+        vBox.setSpacing(20);
+        BackgroundFill backgroundFill = new BackgroundFill(Color.STEELBLUE, CornerRadii.EMPTY, Insets.EMPTY);
+        Background background = new Background(backgroundFill);
+        vBox.setBackground(background);
+        uusMang.setOnMouseClicked(e -> {
+            voitja.hide();
+            // Siia võiks lisada, et ruudustik oleks tühi ja saaks uuesti mängima hakata.
+        });
+        Scene voitjaScene = new Scene(vBox, 600, 300);
+        voitja.setScene(voitjaScene);
+        voitja.show();
         System.out.println("Võitja: " + (redMove ? "punane" : "kollane"));
     }
 
