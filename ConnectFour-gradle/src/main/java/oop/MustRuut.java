@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -45,7 +46,7 @@ public class MustRuut extends Application {
     private Pane nuppJuur = new Pane();
 
     @Override
-    public void start(Stage peaLava) throws Exception {
+    public void start(Stage peaLava) throws NimeAsemelNumber {
         // Connect Four pealkiri
         Text pealkiri = new Text();
         pealkiri.setText("CONNECT FOUR");
@@ -56,9 +57,9 @@ public class MustRuut extends Application {
         // Tutvustav tekst
         Text sissejuhatus = new Text();
         sissejuhatus.setText("Tere tulemast mängima mängu 'Connect Four'! \n" +
-                "Oma käigu ajal pead valima, millisest veerust oma nuppu soovid sisestada. \nSeejärel teeb seda sama sinu vastaseks olev arvuti.\n" +
+                "Esimene mängija valib, millisest veerust oma nuppu sisestada. \nSeejärel teeb seda sama teine mängija.\n" +
                 "Mängu eesmärgiks on olla esimene, kes moodustab horisontaalse, vertikaalse või diagonaalse joone,\nmis oleks sama pikk kui võidu tingimus.\n" +
-                "Alustamiseks pead sisestama oma nime ja sümboli, millega sooviksid mängida. \nSeejärel sisesta soovitud mängulaua suurused ja võidu tingimus.\n" +
+                "Alustamiseks peavad mängijad sisestama oma nimed. \nSeejärel sisestage soovitud mängulaua suurused ja võidu tingimus.\n" +
                 "Head mängimist!\n________________________________________________________________________");
         sissejuhatus.setFill(Color.GOLD);
         sissejuhatus.setTextAlignment(TextAlignment.CENTER);
@@ -67,110 +68,110 @@ public class MustRuut extends Application {
         // Mängu alustamise nupp
         Button startButton = new Button("START");
         startButton.setOnMouseClicked(event -> {
-
             peaLava.hide();
             Stage nimi = new Stage();
-            String mangijaNimi;
-            String mangijaNupp;
 
-            // oma nime sisestamise koht, kust edasi peab hetkel lihtsalt hiirega minema
-            Label kusimus = new Label("Sisestage oma nimi: ");
-            kusimus.setTextFill(Color.GOLD);
+            // Esimese mängija nime sisestamise koht, mis loob Mangija isendi, kelle värviks on punane.
+            Label esimeseNimi = new Label("Sisestage esimese mängija nimi: ");
+            esimeseNimi.setTextFill(Color.GOLD);
             TextField textField = new TextField();
-            textField.setPrefColumnCount(10);
+            textField.setPrefColumnCount(20);
+            Button salvesta = new Button("Salvesta");
+            salvesta.setOnMouseClicked(e -> {
+                try {
+                    kasOnNumber(textField.getText());
+                    esimeneMangija(textField.getText(), "punane");
+                } catch (NimeAsemelNumber nimeAsemelNumber){
+                    Stage erind = new Stage();
 
-            // oma sümboli sisestamise koht, kust edasi liikumiseks peab OK nuppu vajutama
-            Label nupuKusimine = new Label("Sisestage sümbol, millega tahaksite mängida, näiteks '⚫:");
-            nupuKusimine.setTextFill(Color.GOLD);
+                    Label tekkisErind = new Label("Sisestasid nime asemel numbri!");
+                    tekkisErind.setTextFill(Color.GOLD);
+                    tekkisErind.setStyle("-fx-font-size: 32");
+
+                    Button close = new Button("Close");
+                    close.setOnMouseClicked(event2 -> {
+                        erind.hide();
+                    });
+
+                    VBox erindiPaigutus = new VBox();
+
+                    erindiPaigutus.setAlignment(Pos.CENTER);
+                    BackgroundFill backgroundFill = new BackgroundFill(Color.STEELBLUE, CornerRadii.EMPTY, Insets.EMPTY);
+                    Background background = new Background(backgroundFill);
+                    erindiPaigutus.setBackground(background);
+                    erindiPaigutus.setSpacing(20);
+                    erindiPaigutus.getChildren().add(tekkisErind);
+                    erindiPaigutus.getChildren().add(close);
+
+                    Scene erindiStseen = new Scene(erindiPaigutus, 600,300);
+                    erind.setScene(erindiStseen);
+                    erind.show();
+                }
+            });
+
+            // Teise mängija nime sisestamise koht, mis loob Mangija isendi, kelle värviks on kollane.
+            Label teiseNimi = new Label("Sisestage teise mängija nimi: ");
+            teiseNimi.setTextFill(Color.GOLD);
             TextField textField2 = new TextField();
-            textField2.setPrefColumnCount(10);
+            textField2.setPrefColumnCount(20);
+            Button salvesta2 = new Button("Salvesta");
+            salvesta2.setOnMouseClicked(e -> {
+                try {
+                    kasOnNumber(textField2.getText());
+                    teineMangija(textField2.getText(), "kollane");
+                } catch (NimeAsemelNumber nimeAsemelNumber){
+                    Stage erind = new Stage();
 
-            Button OK = new Button("OK");
+                    Label tekkisErind = new Label("Sisestasid nime asemel numbri!");
+                    tekkisErind.setTextFill(Color.GOLD);
+                    tekkisErind.setStyle("-fx-font-size: 32");
+
+                    Button close = new Button("Close");
+                    close.setOnMouseClicked(event2 -> {
+                        erind.hide();
+                    });
+
+                    VBox erindiPaigutus = new VBox();
+
+                    erindiPaigutus.setAlignment(Pos.CENTER);
+                    BackgroundFill backgroundFill = new BackgroundFill(Color.STEELBLUE, CornerRadii.EMPTY, Insets.EMPTY);
+                    Background background = new Background(backgroundFill);
+                    erindiPaigutus.setBackground(background);
+                    erindiPaigutus.setSpacing(20);
+                    erindiPaigutus.getChildren().add(tekkisErind);
+                    erindiPaigutus.getChildren().add(close);
+
+                    Scene erindiStseen = new Scene(erindiPaigutus, 600,300);
+                    erind.setScene(erindiStseen);
+                    erind.show();
+                }
+            });
+
+            // Mängulaua loomise nupp.
+            Button mängulaud = new Button("Loo mängulaud");
+            mängulaud.setOnMouseClicked(e -> {
+                // SIIT HAKKAB MÄNGULAUD
+                peaLava.setScene(new Scene(looSisu()));
+                peaLava.show();
+            });
 
             // paigutus
-            HBox hBox = new HBox(kusimus, textField);
-            hBox.setAlignment(Pos.CENTER);
-            hBox.setSpacing(40);
-            HBox hBoxUus = new HBox(nupuKusimine, textField2);
-            hBoxUus.setAlignment(Pos.CENTER);
-            hBoxUus.setSpacing(40);
-            HBox nupp = new HBox(OK);
-            nupp.setAlignment(Pos.CENTER);
-            VBox vBox = new VBox(hBox, hBoxUus, nupp);
-            vBox.setSpacing(70);
+            HBox hBox1 = new HBox(esimeseNimi, textField, salvesta);
+            hBox1.setAlignment(Pos.CENTER);
+            hBox1.setSpacing(10);
+            HBox hBox2 = new HBox(teiseNimi, textField2, salvesta2);
+            hBox2.setAlignment(Pos.CENTER);
+            hBox2.setSpacing(10);
+            mängulaud.setAlignment(Pos.CENTER);
+            VBox vBox = new VBox(hBox1, hBox2, mängulaud);
+            vBox.setSpacing(50);
             vBox.setAlignment(Pos.CENTER);
             BackgroundFill backgroundFill = new BackgroundFill(Color.STEELBLUE, CornerRadii.EMPTY, Insets.EMPTY);
             Background background = new Background(backgroundFill);
             vBox.setBackground(background);
-            Scene stseen2 = new Scene(vBox, 600, 300);
+            Scene stseen2 = new Scene(vBox, 1000, 500);
             nimi.setScene(stseen2);
             nimi.show();
-
-            // sisestatud andmete väärtustamine
-            textField.setOnAction(e -> {
-                //mangijaNimi = textField.getText();
-            });
-            textField2.setOnAction(e -> {
-                // mangijaNupp = textField2.getText();
-            });
-
-            // mängijate loomine
-            Mangija arvuti = new Mangija("Arvuti", "◙");
-            //Mangija inimene = new Mangija(mangijaNimi, mangijaNupp);
-
-
-            // nupu vajutamisel
-            OK.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    nimi.hide();
-                    Stage numbrid = new Stage();
-
-                    // ridade arvu sisestamine, kust edasi peab hetkel liikuma ise hiirega
-                    Label read = new Label("Sisestage soovitud mängulaua ridade arv, tavamängus 6: ");
-                    read.setTextFill(Color.GOLD);
-                    TextField ridade = new TextField();
-                    ridade.setPrefColumnCount(20);
-                    // ridade arvu väärtustamine
-                    int ridadeArv = Integer.parseInt(ridade.getText());
-
-                    // veergude arvu sisestamine, kust edasi peab hetkel liikuma ise hiirega
-                    Label veerud = new Label("Sisestage soovitud mängulaua veergude arv, tavamängus 7: ");
-                    veerud.setTextFill(Color.GOLD);
-                    TextField veergude = new TextField();
-                    veergude.setPrefColumnCount(20);
-                    // veergude arvu väärtustamine
-                    int veergudeArv = Integer.parseInt(veergude.getText());
-
-                    // võidutingimuse sisestamine, kust edasi ei ole hetkel midagi
-                    Label voidutingimus = new Label("Sisestage soovitud võidutingimus, tavamängus 4:");
-                    voidutingimus.setTextFill(Color.GOLD);
-                    TextField voit = new TextField();
-                    // võidutigimuse väärtustamine
-                    int voiduTingimus = Integer.parseInt(voit.getText());
-
-                    // paigutus
-                    HBox hbox1 = new HBox(read, ridade);
-                    hbox1.setAlignment(Pos.CENTER);
-                    hbox1.setSpacing(20);
-                    HBox hbox2 = new HBox(veerud, veergude);
-                    hbox2.setAlignment(Pos.CENTER);
-                    hbox2.setSpacing(20);
-                    HBox hbox3 = new HBox(voidutingimus, voit);
-                    hbox3.setAlignment(Pos.CENTER);
-                    hbox3.setSpacing(20);
-                    VBox vBox = new VBox(hbox1, hbox2, hbox3);
-                    vBox.setBackground(background);
-                    vBox.setAlignment(Pos.CENTER);
-                    vBox.setSpacing(50);
-                    Scene stseen3 = new Scene(vBox, 600, 300);
-                    numbrid.setScene(stseen3);
-                    numbrid.show();
-
-                    // mängulaua loomine
-                    Maatriks laud = new Maatriks(ridadeArv, veergudeArv, voiduTingimus);
-                }
-            });
         });
 
         VBox vBox = new VBox(pealkiri, sissejuhatus, startButton);
@@ -186,10 +187,28 @@ public class MustRuut extends Application {
         peaLava.setScene(scene);
         peaLava.setResizable(false);
         peaLava.show();
+    }
 
-        // SIIT HAKKAB MÄNGULAUD
-        peaLava.setScene(new Scene(looSisu()));
-        peaLava.show();
+    private boolean kasOnNumber(String text) throws NimeAsemelNumber {
+        boolean onNumber = true;
+        try {
+            int nr = Integer.parseInt(text);
+        } catch (NumberFormatException e){
+            onNumber = false;
+        }
+        if (onNumber)
+            throw new NimeAsemelNumber("Sisestasite nime asemel numbri!");
+        return onNumber;
+    }
+
+    private Mangija teineMangija(String text, String kollane) {
+        Mangija teineMangija = new Mangija(text, kollane);
+        return teineMangija;
+    }
+
+    private Mangija esimeneMangija(String text, String punane) {
+        Mangija esimeneMangija = new Mangija(text, punane);
+        return esimeneMangija;
     }
 
     private Parent looSisu() {
